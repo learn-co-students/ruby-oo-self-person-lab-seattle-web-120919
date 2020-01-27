@@ -1,8 +1,8 @@
 require "pry"
 
 class Person
-  attr_reader :name, :happiness, :hygiene
   attr_accessor :bank_account
+  attr_reader :name, :happiness, :hygiene
 
   def initialize(name)
     @name = name
@@ -33,13 +33,34 @@ class Person
   end
 
   def take_bath
-    if @hygiene > 6
-      @hygiene = 10
-      #   binding.pry
+    self.hygiene += 4
+    return "♪ Rub-a-dub just relaxing in the tub ♫"
+  end
+
+  def work_out
+    self.hygiene -= 3
+    self.happiness += 2
+    return "♪ another one bites the dust ♫"
+  end
+
+  #interpolat the convorsation possibly by using self in ordert o disply both sides of the conversation
+  def call_friend(callee)
+    callee.happiness += 3
+    self.happiness += 3
+    "Hi #{callee.name}! It's #{self.name}. How are you?"
+  end
+
+  def start_conversation(name, topic)
+    if topic == "politics"
+      name.happiness -= 2
+      self.happiness -= 2
+      "blah blah partisan blah lobbyist"
+    elsif topic == "weather"
+      name.happiness += 1
+      self.happiness += 1
+      "blah blah sun blah rain"
     else
-      #   @hygiene + 4
-      hygiene = (@hygiene) + 4
-      return "♪ Rub-a-dub just relaxing in the tub ♫"
+      return "blah blah blah blah blah"
     end
   end
 end
